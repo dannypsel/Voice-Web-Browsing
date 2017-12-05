@@ -464,6 +464,7 @@ function do_click() {
   var s = final_transcript.substring(n).indexOf(" ");
   var elem = (final_transcript.substring(n+6, s)).toUpperCase();
 
+  console.log(elem);
   $("a,input,button").each(function() {
     if(elem == "INPUT") {
       console.log("searhing for input");
