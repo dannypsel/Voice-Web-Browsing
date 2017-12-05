@@ -300,14 +300,11 @@ function capitalize(s) {
 }
 
 function simulateClick(element) {
+  console.log("simulating click on:", element)
   if ($(element).is(".c4")) 
   {
     state = "none";
     return;
-  }
-  else if ($(element).is(".key"))
-  {
-    inputkey(element);
   }
   var dispatchEvent = function (elt, name) {
     var clickEvent = document.createEvent('MouseEvents');
