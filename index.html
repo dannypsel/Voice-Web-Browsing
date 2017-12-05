@@ -118,7 +118,7 @@ new gweb.analytics.AutoTrack({
     border: 0;
     background-color:transparent;
     padding: 0;
-    text-align:horizontal;
+    text-align:center;
     }
     .interim {
     color: gray;
@@ -152,7 +152,7 @@ new gweb.analytics.AutoTrack({
     #textbox {
       text-align:center;
     }
-    
+
     #search {
     position: fixed;
     text-align:center;
@@ -483,9 +483,10 @@ function do_enter() {
   // what do we do on enter?
   console.log("handling enter");
   var n = final_transcript.indexOf(' ');
-  var t = final_transcript.substring(n).indexOf(' ');
+  var s = final_transcript.substring(n).indexOf(' ');
+  var t = final_transcript.substring(s).indexOf(' ');
   
-  var text = encodeURI(final_transcript.substring(n, t));
+  var text = encodeURI(final_transcript.substring(s, t));
   var val = document.getElementById('search');
   val.value += text;
 }
