@@ -55,8 +55,6 @@ new gweb.analytics.AutoTrack({
               $("a,input,button").each(function() {
                 if($(this)[0].tagName == "INPUT") {
                   // look for the text in INPUT fields
-                } else if() {
-
                 }
               })
               simulateClick($(this));
@@ -318,6 +316,28 @@ if (!('webkitSpeechRecognition' in window)) {
     if (ignore_onend) {
       return;
     }
+    var n = final_transcript.indexOf('\n');
+    if (n < 0 || n >= 80) {
+      n = 40 + final_transcript.substring(40).indexOf(' ');
+    }
+    var command = encodeURI(final_transcript.substring(0, n));
+    if(command == "scroll") 
+    {
+      console.log("scroll called");
+    }
+    else if(command == "click")
+    {
+      console.log("click called");
+    }
+    else if(command == "enter")
+    {
+      console.log("enter called");
+    }
+    else
+    {
+      console.log("sorry, that is not a recognized command");
+    }
+
     start_img.src = 'mic.png';
     if (!final_transcript) {
       showInfo('info_start');
