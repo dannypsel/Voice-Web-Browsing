@@ -286,17 +286,17 @@ if (!('webkitSpeechRecognition' in window)) {
   recognition.onstart = function() {
     recognizing = true;
     showInfo('info_speak_now');
-    start_img.src = 'mic.png';
+    start_img.src = 'stop.png';
   };
 
   recognition.onerror = function(event) {
     if (event.error == 'no-speech') {
-      start_img.src = 'mic.png';
+      start_img.src = 'stop.png';
       showInfo('info_no_speech');
       ignore_onend = true;
     }
     if (event.error == 'audio-capture') {
-      start_img.src = 'mic.png';
+      start_img.src = 'stop.png';
       showInfo('info_no_microphone');
       ignore_onend = true;
     }
@@ -335,7 +335,8 @@ if (!('webkitSpeechRecognition' in window)) {
     }
     else
     {
-      console.log("sorry, that is not a recognized command");
+      console.log("sorry, that is not a recognized command:");
+      console.log(command);
     }
 
     start_img.src = 'mic.png';
