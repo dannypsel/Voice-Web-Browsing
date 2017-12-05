@@ -316,8 +316,7 @@ if (!('webkitSpeechRecognition' in window)) {
     }
     else
     {
-      console.log("sorry, that is not a recognized command:");
-      console.log(command);
+      alert("Sorry, that is not a recognized command");
     }
 
     start_img.src = 'mic.png';
@@ -461,11 +460,13 @@ function showInfo(s) {
 function do_click() {
   console.log("handling click");
 
-  var stringpieces = arg.split(/\s/);
+  var n = final_transcript.indexOf("Click ");
+  var s = final_transcript.substring(n).indexOf(" ");
+  var elem = (final_transcript.substring(n+6, s)).toUpperCase();
 
   $("a,input,button").each(function() {
-    if($(this)[0].tagName == "INPUT") {
-      // look for the text in INPUT fields
+    if(elem == "INPUT") {
+      console.log("searhing for input");
     }
   })
   simulateClick($(this));
@@ -483,9 +484,8 @@ function do_enter() {
   // what do we do on enter?
   console.log("handling enter");
   var n = final_transcript.indexOf("Enter ");
-  var s = final_transcript.substring(n+6);
+  var text = final_transcript.substring(n+6);
   
-  var text = encodeURI(s);
   var val = document.getElementById('search');
   val.value += text;
 }
