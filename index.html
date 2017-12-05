@@ -204,31 +204,6 @@ a.c1 {font-weight: normal;}
           src="mic.png" width=15%></button>
         </div>
         <div id='textbox'><p><input type='text' id ='search' placeholder='  What do you want to do?''></p></div>
-        <div id="copy">
-          <button class="button" id="copy_button" onclick="copyButton()">Copy and Paste</button>
-          <div id="copy_info">
-            <p>
-              Press Control-C to copy text.
-            </p>
-            <p>
-              (Command-C on Mac.)
-            </p>
-          </div><button class="button" id="email_button" onclick="emailButton()">Create
-          Email</button>
-          <div id="email_info">
-            <p>
-              Text sent to default email application.
-            </p>
-            <p>
-              (See chrome://settings/handlers to change.)
-            </p>
-          </div>
-        </div>
-        <div class="compact marquee" id="div_language">
-          <select id="select_language"">
-            </select>&nbsp;&nbsp; <select id="select_dialect">
-            </select>
-        </div>
       </div>
     </div><script src="chrome.min.js">
 </script> <script>
@@ -324,14 +299,21 @@ if (!('webkitSpeechRecognition' in window)) {
     if(command == "Scroll") 
     {
       console.log("scroll called");
+      var s = final_transcript.substring(n).indexOf(' ');
+      var dir = encodeURI(final_transcript.substring(n, s));
+      do_scroll(dir);
     }
     else if(command == "Click")
     {
       console.log("click called");
+      do_click();
     }
     else if(command == "Enter")
     {
       console.log("enter called");
+      var t = final_transcript.substring(n).indexOf(' ');
+      var text = encodeURI(final_transcript.substring(n, s));
+      if(text == "Text") do_enter();
     }
     else
     {
@@ -479,6 +461,43 @@ function showInfo(s) {
   } else {
     info.style.visibility = 'hidden';
   }
+}
+
+function do_click() {
+  console.log("handling click")
+
+  //console.log($("*:contains('" + arg + "')"));
+
+  var stringpieces = arg.split(/\s/);
+
+  $("a,input,button").each(function() {
+    if($(this)[0].tagName == "INPUT") {
+      // look for the text in INPUT fields
+    }
+  })
+  simulateClick($(this));
+}
+
+function do_scroll(dir) {
+  console.log("handling scroll`")
+  $('html, body').animate({
+    scrollTop: $(document).scrollTop()+150
+  }, 1000);
+  break;
+}
+
+function do_enter() {
+  // what do we do on enter?
+  console.log("handling enter")
+  var text = document.getElementById('search');
+  var n = final_transcript.indexOf('\n');
+  if (n < 0 || n >= 80) {
+    n = 40 + final_transcript.substring(40).indexOf(' ');
+  }
+  var subject = encodeURI(final_transcript.substring(0, n));
+  var body = encodeURI(final_transcript.substring(n + 1));
+  text.value += subject;
+  text.value += body;
 }
 
 var current_style;
