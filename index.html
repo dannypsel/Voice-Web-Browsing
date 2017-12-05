@@ -459,7 +459,7 @@ function do_click() {
 function do_scroll(dir) {
   console.log("handling scroll`")
   $('html, body').animate({
-    scrollTop: $(document).scrollTop()+150
+    scrollTop: $(window).offset().top
   }, 1000);
   console.log("done scrolling");
 }
