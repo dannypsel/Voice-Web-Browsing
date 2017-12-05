@@ -357,7 +357,7 @@ function do_click() {
     $("input").each(function() {
       console.log("searching for input");
       console.log($(this));
-      simulateClick("#" + $(this).context);
+      simulateClick("#" + $(this).context.id);
     })
   }
   if(elem == "LINK") {
