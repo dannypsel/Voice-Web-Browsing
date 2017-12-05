@@ -301,20 +301,16 @@ function capitalize(s) {
 
 function simulateClick(element) {
   console.log("simulating click on:", element)
-  if ($(element).is(".c4")) 
-  {
-    state = "none";
-    return;
-  }
+  var sc = document.getElementById(element); 
   var dispatchEvent = function (elt, name) {
     var clickEvent = document.createEvent('MouseEvents');
     clickEvent.initEvent(name, true, true);
     elt.dispatchEvent(clickEvent);
   };
-  dispatchEvent(element, 'mouseover');
-  dispatchEvent(element, 'mousedown');
-  dispatchEvent(element, 'click');
-  dispatchEvent(element, 'mouseup');
+  dispatchEvent(sc, 'mouseover');
+  dispatchEvent(sc, 'mousedown');
+  dispatchEvent(sc, 'click');
+  dispatchEvent(sc, 'mouseup');
 };
 
 function startButton(event) {
@@ -357,7 +353,7 @@ function do_click() {
     $("input").each(function() {
       console.log("searching for input");
       console.log($(this));
-      simulateClick("#" + $(this).context.id);
+      simulateClick($(this).context.id);
     })
   }
   if(elem == "LINK") {
