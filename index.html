@@ -316,20 +316,20 @@ if (!('webkitSpeechRecognition' in window)) {
     if (ignore_onend) {
       return;
     }
-    var n = final_transcript.indexOf('\n');
+    var n = final_transcript.indexOf(' ');
     if (n < 0 || n >= 80) {
       n = 40 + final_transcript.substring(40).indexOf(' ');
     }
     var command = encodeURI(final_transcript.substring(0, n));
-    if(command == "scroll") 
+    if(command == "Scroll") 
     {
       console.log("scroll called");
     }
-    else if(command == "click")
+    else if(command == "Click")
     {
       console.log("click called");
     }
-    else if(command == "enter")
+    else if(command == "Enter")
     {
       console.log("enter called");
     }
