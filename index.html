@@ -442,7 +442,7 @@ function showInfo(s) {
 }
 
 function do_click() {
-  console.log("handling click")
+  console.log("handling click");
 
   //console.log($("*:contains('" + arg + "')"));
 
@@ -457,16 +457,16 @@ function do_click() {
 }
 
 function do_scroll(dir) {
-  console.log("handling scroll`")
+  console.log("handling scroll`");
   $('html, body').animate({
-    scrollTop: $(window).offset().top
-  }, 1000);
+    scrollTop: $(document).scrollTop()-500
+  });
   console.log("done scrolling");
 }
 
 function do_enter() {
   // what do we do on enter?
-  console.log("handling enter")
+  console.log("handling enter");
   var text = document.getElementById('search');
   var n = final_transcript.indexOf('\n');
   if (n < 0 || n >= 80) {
