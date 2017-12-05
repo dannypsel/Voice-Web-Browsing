@@ -64,7 +64,7 @@ new gweb.analytics.AutoTrack({
               // what do we do on scroll?
               console.log("handling scroll`")
               $('html, body').animate({
-                scrollTop: $(document).scrollTop()+1000
+                scrollTop: $(window).scrollTop()+1000
               }, 1000);
               break;
             case "enter":
