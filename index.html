@@ -356,7 +356,7 @@ function do_click() {
   if(elem == "INPUT") {
     $("input").each(function() {
       console.log("searching for input");
-      simulateClick($(this).context);
+      simulateClick("#" + $(this).context.context.id);
     })
   }
   if(elem == "LINK") {
