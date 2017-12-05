@@ -27,75 +27,6 @@ new gweb.analytics.AutoTrack({
           profile: 'UA-26908291-1'
         });
     </script>
-    <script>
-    $(document).ready(function() {
-     $("#commandbutton").click(function() {
-      var potentialcommand = $("#command").val();
-
-      console.log(potentialcommand);
-
-        var re = /^(click|scroll|enter)\s(.*)/i;
-        var result = re.exec(potentialcommand);
-
-      if(result) {
-        var verb = result[1];
-          var arg = result[2]
-
-          console.log("verb: " + verb + ", args: " + arg)
-
-          switch(verb) {
-            case "click":
-              // what do we do if click?
-              console.log("handling click")
-
-              //console.log($("*:contains('" + arg + "')"));
-
-              var stringpieces = arg.split(/\s/);
-
-              $("a,input,button").each(function() {
-                if($(this)[0].tagName == "INPUT") {
-                  // look for the text in INPUT fields
-                }
-              })
-              simulateClick($(this));
-
-              break;
-            case "scroll":
-              // what do we do on scroll?
-              console.log("handling scroll`")
-              $('html, body').animate({
-                scrollTop: $(window).scrollTop()+1000
-              }, 1000);
-              break;
-            case "enter":
-              // what do we do on enter?
-              console.log("handling enter")
-                  var text = document.getElementById('search');
-                  var n = final_transcript.indexOf('\n');
-                  if (n < 0 || n >= 80) {
-                    n = 40 + final_transcript.substring(40).indexOf(' ');
-                  }
-                  var subject = encodeURI(final_transcript.substring(0, n));
-                  var body = encodeURI(final_transcript.substring(n + 1));
-                  text.value += subject;
-                  text.value += body;
-              break;
-            default:
-              console.log("sorry, that is not a recognized command")
-          }
-
-
-        //console.log("Scroll " + result[1]);
-        //if(result[1]=="up") {
-          // scroll up
-        //} else if(result[1]=="down") {
-          // scroll down
-        //}
-      }
-
-     })
-    });
-    </script>
     <style>
     #info {
     font-size: 20px;
@@ -138,15 +69,6 @@ new gweb.analytics.AutoTrack({
     margin: 10px 0;
     position: relative;
     top: -50px;
-    }
-
-    #copy {
-    margin-top: 20px;
-    }
-
-    #copy > div {
-    display: none;
-    margin: 0 70px;
     }
 
     #textbox {
@@ -398,36 +320,6 @@ function simulateClick(element) {
   dispatchEvent(element, 'mouseup');
 };
 
-function createEmail() {
-  var n = final_transcript.indexOf('\n');
-  if (n < 0 || n >= 80) {
-    n = 40 + final_transcript.substring(40).indexOf(' ');
-  }
-  var subject = encodeURI(final_transcript.substring(0, n));
-  var body = encodeURI(final_transcript.substring(n + 1));
-  window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
-}
-
-function copyButton() {
-  if (recognizing) {
-    recognizing = false;
-    recognition.stop();
-  }
-  copy_info.style.display = 'inline-block';
-  showInfo('');
-}
-
-function emailButton() {
-  if (recognizing) {
-    create_email = true;
-    recognizing = false;
-    recognition.stop();
-  } else {
-    createEmail();
-  }
-  showInfo('');
-}
-
 function startButton(event) {
   if (recognizing) {
     recognition.stop();
@@ -463,18 +355,29 @@ function do_click() {
   var n = final_transcript.indexOf("Click ");
   var s = final_transcript.substring(n).indexOf(' ');
   var elem = (final_transcript.substring(s+1)).toUpperCase();
-  console.log(s);
   console.log(elem);
-  $("a,input,button").each(function() {
-    if(elem == "INPUT") {
-      console.log("searhing for input");
-    }
-  })
-  /*simulateClick($(this));*/
+  if(elem == "INPUT") {
+    $("input").each(function() {
+      console.log("searching for input");
+      simulateClick($(this));
+    })
+  }
+  if(elem == "LINK") {
+    $("a").each(function() {
+      console.log("searching for link");
+      simulateClick($(this));
+    })
+  }
+  if(elem == "BUTTON") { 
+    $("button").each(function() {
+      console.log("searching for button");
+      simulateClick($(this));
+    })
+  }
 }
 
 function do_scroll(dir) {
-  console.log("handling scroll`");
+  console.log("handling scroll");
   $('html, body').animate({
     scrollTop: $(document).scrollTop()-500
   }, 400);
