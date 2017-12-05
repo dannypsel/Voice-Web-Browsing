@@ -313,6 +313,7 @@ if (!('webkitSpeechRecognition' in window)) {
   };
 
   recognition.onend = function() {
+    console.log("ENDING RECOGNITION");
     recognizing = false;
     if (ignore_onend) {
       return;
