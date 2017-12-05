@@ -161,7 +161,7 @@ new gweb.analytics.AutoTrack({
     width:450px;
     height:25px;
     background: #D3D3D3;
-    color:white;
+    color:black;
     border:none;
     z-index: 0;
     }
@@ -482,11 +482,10 @@ function do_scroll(dir) {
 function do_enter() {
   // what do we do on enter?
   console.log("handling enter");
-  var n = final_transcript.indexOf(' ');
-  var s = final_transcript.substring(n).indexOf(' ');
-  var t = final_transcript.substring(s).indexOf(' ');
+  var n = final_transcript.indexOf("Enter ");
+  var s = final_transcript.substring(n+6);
   
-  var text = encodeURI(final_transcript.substring(s, t));
+  var text = encodeURI(s);
   var val = document.getElementById('search');
   val.value += text;
 }
