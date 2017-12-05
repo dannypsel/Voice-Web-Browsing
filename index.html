@@ -225,25 +225,7 @@ a.c1 {font-weight: normal;}
 
       doubleTracker.trackClass('doubletrack', true);
     </script> <script>
-var langs =
-[['English',         ['en-AU', 'Australia'],
-                     ['en-CA', 'Canada'],
-                     ['en-IN', 'India'],
-                     ['en-KE', 'Kenya'],
-                     ['en-TZ', 'Tanzania'],
-                     ['en-GH', 'Ghana'],
-                     ['en-NZ', 'New Zealand'],
-                     ['en-NG', 'Nigeria'],
-                     ['en-ZA', 'South Africa'],
-                     ['en-PH', 'Philippines'],
-                     ['en-GB', 'United Kingdom'],
-                     ['en-US', 'United States']]];
 
-for (var i = 0; i < langs.length; i++) {
-  select_language.options[i] = new Option(langs[i][0], i);
-}
-select_language.selectedIndex = 7;
-select_dialect.selectedIndex = 6;
 showInfo('info_start');
 
 var create_email = false;
@@ -439,7 +421,6 @@ function startButton(event) {
     return;
   }
   final_transcript = '';
-  recognition.lang = select_dialect.value;
   recognition.start();
   ignore_onend = false;
   final_span.innerHTML = '';
@@ -483,7 +464,6 @@ function do_scroll(dir) {
   $('html, body').animate({
     scrollTop: $(document).scrollTop()+150
   }, 1000);
-  break;
 }
 
 function do_enter() {
