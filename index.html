@@ -289,6 +289,7 @@ if (!('webkitSpeechRecognition' in window)) {
   recognition.onend = function() {
     console.log("ENDING RECOGNITION");
     recognizing = false;
+    start_img.src = 'mic.png';
     if (ignore_onend) {
       return;
     }
@@ -319,7 +320,6 @@ if (!('webkitSpeechRecognition' in window)) {
       alert("Sorry, that is not a recognized command");
     }
 
-    start_img.src = 'mic.png';
     if (!final_transcript) {
       showInfo('info_start');
       return;
@@ -470,7 +470,7 @@ function do_click() {
       console.log("searhing for input");
     }
   })
-  simulateClick($(this));
+  /*simulateClick($(this));*/
 }
 
 function do_scroll(dir) {
